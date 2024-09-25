@@ -30,7 +30,7 @@ const AddToCartButton = ({ product }) => {
     useEffect(() => {
         NewWishlistData();
         fetchCartData()
-    }, []);
+    }, [cartData]);
 
     if (!product || !product.id) {
         return null;
@@ -43,7 +43,7 @@ const AddToCartButton = ({ product }) => {
     const handleClick = async () => {
         try {
             if(isInCart){
-                alert("Already There in Cart")
+                alert("Already Added To Cart")
             }else{
                 const productData = {
                     productId: product.id,

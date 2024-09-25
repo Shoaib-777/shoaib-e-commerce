@@ -30,7 +30,7 @@ const Navbar = () => {
             console.log("error caught by wishlistLengths",error)
         }}
         WishlistLengths()
-    },[])
+    },[WishlistLength])
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -65,7 +65,7 @@ const Navbar = () => {
                 }
             };
             fetchProductsCarts()
-        }, []);
+        }, [cartsData]);
     
     return (
         <>

@@ -92,7 +92,6 @@ const Checkout = () => {
   
         await axios.post("https://shoaib-e-commerce.vercel.app/api/cartjs", { products: [] });
         toast.success("Order Placed Successfully!");
-        SetOrder(false)
         Router.push('/profile');
       } catch (error) {
         console.error("Error in handling order: ", error);
