@@ -11,7 +11,7 @@ export const authConfig = {
           if (isLoggedIn) return true;
           return false;
         } else if (isLoggedIn) {
-          const baseUrl = 'http://localhost:3000'
+          const baseUrl = 'https://shoaib-e-commerce.vercel.app'
           return Response.redirect(new URL('/profile',baseUrl));
         }
         return true;

@@ -33,7 +33,7 @@ const Category = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/allproducts/category/${id}`);
+        const res = await axios.get(`https://shoaib-e-commerce.vercel.app/api/allproducts/category/${id}`);
         const categoryObject = res.data.productsCategory;
         const products = categoryObject[0]?.products || []; 
         setCategoryData(products || []);

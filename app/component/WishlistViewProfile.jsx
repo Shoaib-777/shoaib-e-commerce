@@ -9,7 +9,7 @@ const WishlistViewProfile = () => {
   useEffect(()=>{
     const fetchData = async()=>{
     try {
-        const response = await axios.get('http://localhost:3000/api/wishlist')
+        const response = await axios.get('https://shoaib-e-commerce.vercel.app/api/wishlist')
         setWishItems(response.data.wishlist || [])
       }  
     catch (error) {

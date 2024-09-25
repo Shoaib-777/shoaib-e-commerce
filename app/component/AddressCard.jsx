@@ -9,7 +9,7 @@ import axios from "axios";
 const AddressCard = ({ handleClick, addressDetails, fetchDetails, loading }) => {
   const DeleteAddress = async (v) => {
     try {
-      await axios.delete(`http://localhost:3000/api/address/${v._id}`);
+      await axios.delete(`https://shoaib-e-commerce.vercel.app/api/address/${v._id}`);
       alert("Address Deleted Successfully!");
       fetchDetails(); // Re-fetch address details after deletion
     } catch (error) {

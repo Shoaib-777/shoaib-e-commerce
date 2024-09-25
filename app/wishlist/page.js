@@ -14,7 +14,7 @@ const Wishlist = () => {
   useEffect(() => {
     const FetchWishlist = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/wishlist");
+        const response = await axios.get("https://shoaib-e-commerce.vercel.app/api/wishlist");
         // console.log("iam wishlist data",response.data.wishlist)
         setWishItems(response.data.wishlist || []);
         setLoading(false)

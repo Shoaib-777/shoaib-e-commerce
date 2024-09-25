@@ -16,11 +16,11 @@ const DetailsPage = ({ params }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/allproducts/${id}`);
+        const res = await axios.get(`https://shoaib-e-commerce.vercel.app/api/allproducts/${id}`);
         setSingleData(res.data.productData || []);
 
         // Fetch similar products after singleData is updated
-        const similarRes = await axios.get(`http://localhost:3000/api/allproducts/category/${res.data.productData.category}`);
+        const similarRes = await axios.get(`https://shoaib-e-commerce.vercel.app/api/allproducts/category/${res.data.productData.category}`);
         const filt = similarRes.data.productsCategory[0].products.filter((product) => product.id !== id);
         setSimilarData(filt);
       } catch (error) {

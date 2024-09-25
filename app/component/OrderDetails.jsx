@@ -10,7 +10,7 @@ const OrderDetails = () => {
     const [loading,setLoading]= useState(true)
 
     const fetchOrder = async () => {
-        const res = await axios.get("http://localhost:3000/api/orders");
+        const res = await axios.get("https://shoaib-e-commerce.vercel.app/api/orders");
         setOrderData(res.data.orders || []);
         setLoading(false)
     };
@@ -26,7 +26,7 @@ const OrderDetails = () => {
     };
     const DeleteOrder = async (v) => {
         try {
-          await axios.delete(`http://localhost:3000/api/orders/${v._id}`);
+          await axios.delete(`https://shoaib-e-commerce.vercel.app/api/orders/${v._id}`);
           toast.success("Order Deleted Successfully!");
           fetchOrder(); // Re-fetch orders  after deletion
         } catch (error) {

@@ -13,7 +13,7 @@
 // // Fetch products
 // const fetchProducts = async () => {
 //   try {
-//     const res = await fetch('http://localhost:3000/api/allproducts'); // Adjust the URL as needed
+//     const res = await fetch('https://shoaib-e-commerce.vercel.app/api/allproducts'); // Adjust the URL as needed
 //     if (!res.ok) {
 //       throw new Error('Network response was not ok');
 //     }
@@ -95,7 +95,7 @@ const Products = async () => {
   const [allproducts,setAllProducts]=useState([])
   useEffect(()=>{
     const handleAllProdcuts = async()=>{
-  const res = await axios.get(`http://localhost:3000/api/allproducts`)
+  const res = await axios.get(`https://shoaib-e-commerce.vercel.app/api/allproducts`)
   setAllProducts( res.data.products)
     }
     handleAllProdcuts()

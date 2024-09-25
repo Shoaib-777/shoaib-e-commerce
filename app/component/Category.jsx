@@ -10,7 +10,7 @@ useEffect(()=>{
 FetchCatrgory()
 },[])
   const FetchCatrgory = async () => {
-    const res = await axios.get(`http://localhost:3000/api/allproducts`)
+    const res = await axios.get(`https://shoaib-e-commerce.vercel.app/api/allproducts`)
     setCategoryData( res.data.categories)
 }
   const ImageURLS = [ '/images/electronics.jpg','/images/jewelery.jpg',`/images/men's clothing.jpg`,`/images/women's clothing.jpeg`

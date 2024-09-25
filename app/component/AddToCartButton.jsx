@@ -11,7 +11,7 @@ const AddToCartButton = ({ product }) => {
     const Router = useRouter();
     const NewWishlistData = async () => {
         try {
-            const res = await axios.get('http://localhost:3000/api/wishlist')
+            const res = await axios.get('https://shoaib-e-commerce.vercel.app/api/wishlist')
             setInWishList(res.data.wishlist || [])
         } catch (error) {
             console.error("Error fetching Alerady Exist wishlist products:", error);
@@ -20,7 +20,7 @@ const AddToCartButton = ({ product }) => {
 
     const fetchCartData = async ()=>{
         try {
-            const res = await axios.get("http://localhost:3000/api/cartjs")
+            const res = await axios.get("https://shoaib-e-commerce.vercel.app/api/cartjs")
             setCartsData(res.data.products || [])
         } catch (error) {
             console.log("Error Fetching Already Exist Cart products",error)

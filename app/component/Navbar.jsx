@@ -23,7 +23,7 @@ const Navbar = () => {
 
     useEffect(()=>{
         const WishlistLengths = async()=>{
-            const res = await axios.get("http://localhost:3000/api/wishlist")
+            const res = await axios.get("https://shoaib-e-commerce.vercel.app/api/wishlist")
             setWishlistLength(res.data.wishlist || [])
         }
         WishlistLengths()
@@ -31,7 +31,7 @@ const Navbar = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/allproducts');
+                const response = await axios.get('https://shoaib-e-commerce.vercel.app/api/allproducts');
                 setProducts(response.data.products || []);
             } catch (error) {
                 console.error('Error fetching products:', error);
@@ -55,7 +55,7 @@ const Navbar = () => {
     useEffect(() => {
             const fetchProductsCarts = async () => {
                 try {
-                    const response = await axios.get('http://localhost:3000/api/cartjs');
+                    const response = await axios.get('https://shoaib-e-commerce.vercel.app/api/cartjs');
                     setCartsData(response.data.products || []);
                 } catch (error) {
                     console.error('Error fetching products:', error);

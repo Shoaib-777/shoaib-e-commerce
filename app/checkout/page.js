@@ -60,7 +60,7 @@ const Checkout = () => {
   
     const fetchDetails = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/address");
+        const res = await axios.get("https://shoaib-e-commerce.vercel.app/api/address");
         if(res.data.userAddress.length === 0 ){
           setShowForm(true)
           setShowNewAddressButton(false)
@@ -78,19 +78,19 @@ const Checkout = () => {
     const handleClick = async (selectedAddress) => {
       try {
         // console.log("selected Address",selectedAddress)
-        const cartResponse = await axios.get("http://localhost:3000/api/cartjs");
+        const cartResponse = await axios.get("https://shoaib-e-commerce.vercel.app/api/cartjs");
   
         if (!cartResponse.data.products || cartResponse.data.products.length === 0) {
           alert("Your cart is empty.");
           return;
         }
   
-        await axios.post("http://localhost:3000/api/orders", {
+        await axios.post("https://shoaib-e-commerce.vercel.app/api/orders", {
           products: cartResponse.data.products,
           address: selectedAddress,
         });
   
-        await axios.post("http://localhost:3000/api/cartjs", { products: [] });
+        await axios.post("https://shoaib-e-commerce.vercel.app/api/cartjs", { products: [] });
         toast.success("Order Placed Successfully!");
         SetOrder(false)
         Router.push('/profile');
