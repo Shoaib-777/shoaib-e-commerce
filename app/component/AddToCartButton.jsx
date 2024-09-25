@@ -56,6 +56,7 @@ const AddToCartButton = ({ product }) => {
                 };
                 await axios.post('/api/cartjs', { product: productData });
                 toast.success("Item Is Added To Cart");
+                alert("Product Is Added To Cart")
             }
         } catch (error) {
             toast.error("Please Login First ");
