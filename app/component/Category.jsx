@@ -1,10 +1,9 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { FetchCatrgory } from '../lib/data'
 import Link from 'next/link'
 import { BiArrowToRight } from 'react-icons/bi'
 
-const Category = async() => {
+const Category = () => {
   const [categoryData,setCategoryData]=useState([])
 useEffect(()=>{
 FetchCatrgory()
