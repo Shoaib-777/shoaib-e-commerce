@@ -1,7 +1,7 @@
 import NewDeleteButton from "./NewDeleteButton";
-import Link from "next/link";
 import IncreaseDecrease from "./IncreaseDecrease";
 import CheckoutCartButton from "./CheckoutCartButton";
+import ViewButton from "./ViewButton";
 
 const AddToCart = ({ cartsData, setCartsData,setCart }) => {
   // Check if cartsData is undefined or empty
@@ -45,11 +45,7 @@ const AddToCart = ({ cartsData, setCartsData,setCart }) => {
                   <h3 className="font-semibold">${product.productPrice}</h3>
                 </div>
                 <div className="flex items-center justify-between gap-x-2">
-                  <div>
-                    <Link href={`/products/${product.productId}`}>
-                      <button className="px-4 py-1 bg-green-600 hover:bg-green-800 text-white font-bold">View</button>
-                    </Link>
-                  </div>
+                  <ViewButton product={product} setCart={setCart}/>
                   <div>
                     <NewDeleteButton 
                       cartsData={cartsData}           
