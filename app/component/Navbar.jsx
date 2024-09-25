@@ -23,9 +23,12 @@ const Navbar = () => {
 
     useEffect(()=>{
         const WishlistLengths = async()=>{
-            const res = await axios.get("https://shoaib-e-commerce.vercel.app/api/wishlist")
-            setWishlistLength(res.data.wishlist || [])
-        }
+                try {
+                const res = await axios.get("https://shoaib-e-commerce.vercel.app/api/wishlist")
+                setWishlistLength(res.data.wishlist)
+            } catch (error) {
+            console.log("error caught by wishlistLengths",error)
+        }}
         WishlistLengths()
     },[])
     useEffect(() => {

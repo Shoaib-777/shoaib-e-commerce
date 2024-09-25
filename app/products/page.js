@@ -82,6 +82,7 @@ import Link from "next/link";
 import AddToCartButton from "../component/AddToCartButton"; // Update the import path if needed
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -91,17 +92,28 @@ const shuffleArray = (array) => {
   return array;
 };
 
-const Products = async () => {
+const Products =() => {
   const [allproducts,setAllProducts]=useState([])
+  const [loading,setLoading]= useState(true)
+
   useEffect(()=>{
     const handleAllProdcuts = async()=>{
   const res = await axios.get(`https://shoaib-e-commerce.vercel.app/api/allproducts`)
   setAllProducts( res.data.products)
+  setLoading(false)
+
     }
     handleAllProdcuts()
   },[])
   const ShufflesProducts = shuffleArray(allproducts);
-
+  if(loading)
+    return(
+<>
+<div className="w-full flex justify-center items-center">
+    <Image src={'/images/loadingGif.gif'} alt="Loading..." width={60} height={60}/>
+</div>
+</>
+)
   return (
     <>
       <div className="border border-gray-200 px-4">

@@ -2,18 +2,31 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { BiArrowToRight } from 'react-icons/bi'
+import axios from 'axios'
+import Image from 'next/image'
 
 const Category = () => {
   const [categoryData,setCategoryData]=useState([])
+  const [loading,setLoading]= useState(true)
+
 useEffect(()=>{
 FetchCatrgory()
 },[])
   const FetchCatrgory = async () => {
     const res = await axios.get(`https://shoaib-e-commerce.vercel.app/api/allproducts`)
     setCategoryData( res.data.categories)
+    setLoading(false)
 }
   const ImageURLS = [ '/images/electronics.jpg','/images/jewelery.jpg',`/images/men's clothing.jpg`,`/images/women's clothing.jpeg`
   ]
+  if(loading)
+    return(
+<>
+<div className="w-full flex justify-center items-center">
+    <Image src={'/images/loadingGif.gif'} alt="Loading..." width={60} height={60}/>
+</div>
+</>
+)
   return (
     <>
     <div className='border-b-2 border-gray-200 mt-2 mb-4'>
