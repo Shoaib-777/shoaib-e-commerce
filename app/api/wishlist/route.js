@@ -25,12 +25,6 @@ export async function POST(req) {
     }
 
     // Check if the product already exists in the wishlist
-    const productExists = userdata.wishlist.some(item => item.productIdw === wishlist.productIdw);
-
-    if (productExists) {
-      return NextResponse.json({ message: "Product already in wishlist" }, { status: 409 });
-    }
-
     // Add the product to the user's wishlist
     userdata.wishlist.push({
       productIdw: wishlist.productIdw,

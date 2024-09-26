@@ -74,11 +74,6 @@ export async function POST(req) {
     // Check if it's the first operation (using 'product' field)
     if (product && product.productId) {
       // First operation logic
-      const productExists = userdata.products.some(item => item.productId === product.productId);
-
-      if (productExists) {
-        return NextResponse.json({ message: "Product already in cart", products: userdata.products }, { status: 409 });
-      }
 
       userdata.products.push({
         productId: product.productId,
