@@ -44,6 +44,7 @@ const AddToCartButton = ({ product }) => {
         try {
             if(isInCart){
                 alert("Already Added To Cart")
+                return;
             }else if (!isInCart){
                 const productData = {
                     productId: product.id,
@@ -57,10 +58,12 @@ const AddToCartButton = ({ product }) => {
                 await axios.post('/api/cartjs', { product: productData });
                 toast.success("Item Is Added To Cart");
                 alert("Product Is Added To Cart")
+                return
             }
             else{
                 toast.error("Please Login First ");
                 Router.push('/login')
+                return
             }
         } catch (error) {
             toast.error("Please Login First ");
