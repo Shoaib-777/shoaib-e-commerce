@@ -1,6 +1,6 @@
 'use client'
 import { IoBagCheckSharp, IoHeartCircleOutline } from "react-icons/io5";
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import axios from 'axios';
 import { useEffect, useState } from "react";
 
@@ -30,7 +30,7 @@ const AddToCartButton = ({ product }) => {
     useEffect(() => {
         NewWishlistData();
         fetchCartData()
-    }, [cartData,inWishList,disablewishlist]);
+    }, [cartData,inWishList,disablewishlist,disableAddToCart]);
 
     if (!product || !product.id) {
         return null;
@@ -98,7 +98,8 @@ const AddToCartButton = ({ product }) => {
         }
     };
 
-    return (
+    return (<>
+        <ToastContainer/>
         <div className="flex justify-between px-1 items-center">
             <button 
                 className="bg-black text-white px-4 py-2 mt-1 text-nowrap rounded-lg flex gap-2 justify-center items-center text-center"
@@ -114,7 +115,7 @@ const AddToCartButton = ({ product }) => {
                 <IoHeartCircleOutline className={`w-10 h-10 ${isInWishList ? "fill-pink-600":"fill-black"}`}/>
             </button>
         </div>
-    );
+        </>);
 };
 
 export default AddToCartButton;
