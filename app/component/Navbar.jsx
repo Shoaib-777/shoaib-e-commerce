@@ -61,9 +61,6 @@ const Navbar = () => {
                     const response = await axios.get('https://shoaib-e-commerce.vercel.app/api/cartjs');
                     setCartsData(response.data.products || []);
                 } catch (error) {
-                    if(cart === true){
-                        setCart(false)
-                    }
                     console.error('Error fetching products:', error);
                 }
             };
