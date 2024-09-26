@@ -30,7 +30,7 @@ const AddToCartButton = ({ product }) => {
     useEffect(() => {
         NewWishlistData();
         fetchCartData()
-    }, [cartData]);
+    }, [cartData,inWishList]);
 
     if (!product || !product.id) {
         return null;
@@ -44,7 +44,7 @@ const AddToCartButton = ({ product }) => {
         try {
             if(isInCart){
                 alert("Already Added To Cart")
-            }else{
+            }else if (!isInCart){
                 const productData = {
                     productId: product.id,
                     productTitle: product.title,
@@ -58,6 +58,10 @@ const AddToCartButton = ({ product }) => {
                 toast.success("Item Is Added To Cart");
                 alert("Product Is Added To Cart")
             }
+            else{
+                toast.error("Please Login First ");
+                Router.push('/login')
+            }
         } catch (error) {
             toast.error("Please Login First ");
             Router.push('/login')
@@ -69,7 +73,7 @@ const AddToCartButton = ({ product }) => {
             if (isInWishList) {
                 await axios.delete(`/api/wishlist/${product.id}`);
                 toast.success("Removed From Wishlist");
-            } else {
+            } else if(!isInWishList) {
                 const wishlistData = {
                     productIdw: product.id,
                     productTitlew: product.title,
@@ -80,7 +84,11 @@ const AddToCartButton = ({ product }) => {
                 };
                 await axios.post('/api/wishlist', { wishlist: wishlistData });
                 toast.success("Added To Wishlist");
-                    Router.push('/wishlist');
+                Router.push('/wishlist');
+            }
+            else{
+            toast.error("Please Login First");
+            Router.push('/login')
             }
         } catch (error) {
             toast.error("Please Login First");
