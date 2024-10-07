@@ -70,7 +70,7 @@ const Category = () => {
           {categoryData.map((product, i) => (
             <div key={i}>
               <div className="mx-auto px-3 py-4 w-[270px] h-[455px] overflow-hidden shadow-lg">
-                <Link href={`/products/${product.id}`}><div className="overflow-hidden">
+                <Link href={`/products/${product._id}`}><div className="overflow-hidden">
                   <img src={product.image} alt='no image found' className="w-[250px] h-[250px] object-contain border border-gray-200 px-2 hover:scale-125 transition-transform duration-200" />
                 </div>
                 <div className="flex justify-between items-center px-1 mt-2">

@@ -78,7 +78,7 @@ const DetailsPage = ({ params }) => {
           {similarData.map((product) => (
             <div key={product.id}>
               <div className="mx-auto px-3 py-4 w-[270px] h-[455px] overflow-hidden shadow-lg">
-                <Link href={`/products/${product.id}`}>
+                <Link href={`/products/${product._id}`}>
                   <div className="overflow-hidden">
                     <img
                       src={product.image}

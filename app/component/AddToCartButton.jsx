@@ -48,7 +48,7 @@ const AddToCartButton = ({ product }) => {
             }else if (!isInCart){
                 setDisableAddToCart(true)
                 const productData = {
-                    productId: product.id,
+                    productId: product._id,
                     productTitle: product.title,
                     productDescription: product.description,
                     productImage: product.image,
@@ -79,7 +79,7 @@ const AddToCartButton = ({ product }) => {
             } else if(!isInWishList) {
                 setDisableWishlist(true)
                 const wishlistData = {
-                    productIdw: product.id,
+                    productIdw: product._id,
                     productTitlew: product.title,
                     productDescriptionw: product.description,
                     productImagew: product.image,

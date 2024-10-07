@@ -131,7 +131,7 @@ const Navbar = () => {
                         {filteredProducts.length > 0 && (
                             <ul className={` ${appear ? 'block' : 'hidden'} w-full bg-white border border-gray-300 rounded mt-1 max-h-60 overflow-y-auto z-20`}>
                                 {filteredProducts.map(product => (
-                                    <Link key={product.id} href={`/products/${product.id}`}>
+                                    <Link key={product.id} href={`/products/${product._id}`}>
                                         <li key={product.id} className="p-2 border-b hover:bg-gray-100 ">
                                             <h3 onClick={() => setAppear(false)} className="text-sm font-semibold overflow-hidden tracking-tighter text-nowrap">{product.title}</h3>
                                             <p className="text-sm text-gray-600 hidden">{product.description}</p>
