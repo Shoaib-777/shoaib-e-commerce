@@ -60,44 +60,66 @@ export const POST = async (req) => {
     }
 };
 
+
 export const PUT = async (req) => {
-    const body = await req.json();
-    const { userId, productId, action } = body;
-    if (!userId || !productId) return NextResponse.json({ message: "User ID & Product ID required" }, { status: 400 });
-    try {
-        await ConnectDB();
-        if (action==="increase") {
-            const cart = await Cart.findOneAndUpdate(
-                { user:userId,"items.product":productId },
-                { $inc:{ "items.$.quantity":1 } },
-                { new:true }
-            );
-            return NextResponse.json(cart,{ status:200 });
-        }
-        if (action==="decrease") {
-            let cart = await Cart.findOne({ user:userId,"items.product":productId });
-            if (!cart) return NextResponse.json({ message:"Cart not found" },{ status:404 });
-            const item = cart.items.find(i=>i.product.toString()===productId);
-            if (!item) return NextResponse.json({ message:"Item not in cart" },{ status:404 });
-            if (item.quantity>1) {
-                cart = await Cart.findOneAndUpdate(
-                    { user:userId,"items.product":productId },
-                    { $inc:{ "items.$.quantity":-1 } },
-                    { new:true }
-                );
-            } else {
-                cart = await Cart.findOneAndUpdate(
-                    { user:userId },
-                    { $pull:{ items:{ product:productId } } },
-                    { new:true }
-                );
-            }
-            return NextResponse.json(cart,{ status:200 });
-        }
-    } catch (error) {
-        return NextResponse.json({ message:"Internal server error",error:error.message },{ status:500 });
+  const { userId, itemId, action } = await req.json();
+
+  if (!userId || !itemId) {
+    return NextResponse.json(
+      { message: "User ID & Item ID required" },
+      { status: 400 }
+    );
+  }
+
+  try {
+    await ConnectDB();
+
+    if (action === "increase") {
+      const cart = await Cart.findOneAndUpdate(
+        { user: userId, "items._id": itemId },
+        { $inc: { "items.$.quantity": 1 } },
+        { new: true }
+      );
+      return NextResponse.json(cart, { status: 200 });
     }
+
+    if (action === "decrease") {
+      let cart = await Cart.findOne({ user: userId, "items._id": itemId });
+      if (!cart) {
+        return NextResponse.json({ message: "Cart not found" }, { status: 404 });
+      }
+
+      const item = cart.items.id(itemId);
+      if (!item) {
+        return NextResponse.json({ message: "Item not in cart" }, { status: 404 });
+      }
+
+      if (item.quantity > 1) {
+        cart = await Cart.findOneAndUpdate(
+          { user: userId, "items._id": itemId },
+          { $inc: { "items.$.quantity": -1 } },
+          { new: true }
+        );
+      } else {
+        cart = await Cart.findOneAndUpdate(
+          { user: userId },
+          { $pull: { items: { _id: itemId } } },
+          { new: true }
+        );
+      }
+
+      return NextResponse.json(cart, { status: 200 });
+    }
+
+    return NextResponse.json({ message: "Invalid action" }, { status: 400 });
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Internal server error", error: error.message },
+      { status: 500 }
+    );
+  }
 };
+
 
 
 
