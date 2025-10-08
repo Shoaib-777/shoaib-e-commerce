@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React, { useRef } from "react";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 
@@ -47,11 +48,13 @@ const Category = () => {
             key={i}
             className="min-w-[300px] max-w-[300px] h-[350px] flex-shrink-0 rounded-md border border-gray-300 shadow-md hover:border-gray-400 hover:shadow-lg flex flex-col justify-center items-center gap-y-3 snap-center"
           >
-            <img
-              src={v.image}
-              alt={v.category}
-              className="w-[250px] h-[250px] object-contain"
-            />
+            <Link href={`/categories/${v.category}`}>
+              <img
+                src={v.image}
+                alt={v.category}
+                className="w-[250px] h-[250px] object-contain"
+              />
+            </Link>
             <h4 className="font-bold capitalize text-xl">{v.category}</h4>
           </div>
         ))}
@@ -62,7 +65,7 @@ const Category = () => {
         onClick={() => scroll("right")}
         className="absolute top-[40%] right-4 -translate-y-1/2 bg-white shadow-lg rounded-full p-2 z-10 lg:hidden"
       >
-        <SlArrowRight  size={30} />
+        <SlArrowRight size={30} />
       </button>
     </div>
   );

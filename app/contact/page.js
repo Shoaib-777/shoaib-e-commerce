@@ -1,9 +1,12 @@
-"use client";
+import { sendQuery } from '@/utils/ServerActions'
 import React from 'react'
-// import { ContactHelpQuery } from '../utils/crudcontact'
 
-const Contact = () => {
-    const handleSubmit = (e) => e.preventDefault()
+export const metadata = {
+  title: "Contact Us | FlashCart",
+  description: "Welcome to the FlashCart, Please Feel Free To Reach Out, You'r Feedback Really Appreciate Us.",
+};
+
+const Contact = async () => {
     return (
         <>
             <div className='bg-pink-400 py-4'>
@@ -21,26 +24,25 @@ const Contact = () => {
                     </div>
                     <div className='px-2 md:px-4 w-full'>
                         <form
-                            onSubmit={handleSubmit}
-                        //   action={ContactHelpQuery}
+                            action={sendQuery}
                         >
                             <div className='w-full'>
                                 <h2 className='font-bold text-white text-2xl mt-4 mb-4'>Contact Us</h2>
                                 <div className='px-6 w-full'>
                                     <div className='flex border border-white rounded-3xl px-2 md:px-4 py-2 gap-2 mb-6'>
-                                        <label className='text-white font-bold'>Name</label> <input type="text" name="username" id="" className='bg-transparent px-2 md:px-4 outline-none text-black text-[16px] w-full ' required={true} suppressHydrationWarning/>
+                                        <label className='text-white font-bold'>Name</label> <input type="text" name="name" id="name" className='bg-transparent px-2 md:px-4 outline-none text-black text-[16px] w-full ' required={true} />
                                     </div>
                                     <div className='flex border border-white rounded-3xl px-4 py-2 gap-2 mb-6'>
-                                        <label className='text-white font-bold'>Email</label> <input type="email" name="email" id="" className='bg-transparent px-2 md:px-4 outline-none text-black text-[16px] w-full ' required={true} suppressHydrationWarning/>
+                                        <label className='text-white font-bold'>Email</label> <input type="email" name="email" id="" className='bg-transparent px-2 md:px-4 outline-none text-black text-[16px] w-full ' required={true} />
                                     </div>
                                     <div className='flex border border-white rounded-3xl px-4 py-2 gap-2 mb-6'>
-                                        <label className='text-white font-bold'>Phone</label> <input type="phone" name="phone" id="" className='bg-transparent px-1 md:px-3 outline-none text-black text-[16px] w-full ' required={true} suppressHydrationWarning/>
+                                        <label className='text-white font-bold'>Phone</label> <input type="phone" name="phone" id="" className='bg-transparent px-1 md:px-3 outline-none text-black text-[16px] w-full ' required={true} maxLength={12} />
                                     </div>
                                     <div className=' border border-white rounded-3xl px-4 py-2 gap-2 mb-6'>
-                                        <label className='text-white font-bold block'>Message</label><textarea className='bg-transparent px-2 md:px-4 outline-none text-black text-[16px] w-full h-[224px] sm:h-[122px] ' name="message" id="" suppressHydrationWarning></textarea>
+                                        <label className='text-white font-bold block'>Message</label><textarea className='bg-transparent px-2 md:px-4 outline-none text-black text-[16px] w-full h-[224px] sm:h-[122px] ' name="message" id=""></textarea>
                                     </div>
                                     <div>
-                                        <button className='bg-white px-4 py-1 font-bold text-black rounded-md'>Submit</button>
+                                        <button type='submit' className='bg-white px-4 py-1 font-bold text-black rounded-md'>Submit</button>
                                     </div>
                                 </div>
                             </div>

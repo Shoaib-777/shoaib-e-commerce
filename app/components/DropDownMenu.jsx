@@ -1,28 +1,60 @@
 "use client";
-import React, { useState } from 'react'
+
+import React, { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
+import { useRouter } from "next/navigation";
 
-const DropDownMenu = () => {
-  const [showDropDown,setShowDropDown]=useState(false)
-  const [category,setCateGory]=useState("")
-  const cat = ["men's wearing","womens wearing","electronics","wear ables"]
+const DropDownMenu = ({ currentCategory }) => {
+  const [showDropDown, setShowDropDown] = useState(false);
+  const [category, setCategory] = useState(currentCategory || "");
+  const router = useRouter();
+
+  const categories = ["All","men's clothing", "jewelery", "electronics", "women's clothing"];
+
+  const handleSelect = (value) => {
+    setShowDropDown(false);
+    setCategory((value));
+    router.push(`/categories/${value}`);
+  };
+
   return (
-    <div className='w-full border border-gray-300 rounded-lg min-w-[200px] px-2 py-1 relative z-20 group'>
-      <div onClick={()=>setShowDropDown(true)} className='flex justify-between items-center gap-x-2'>
-        <div className={` capitalize ${category && "text-sky-400"} `}>{category || "Category"}</div>
-        <div>
-          <IoIosArrowDown className='group-hover:rotate-180'/>
+    <div className="w-full border border-gray-300 rounded-lg min-w-[200px] px-2 py-1 relative group">
+      <div
+        onClick={() => setShowDropDown((prev) => !prev)}
+        className="flex justify-between items-center gap-x-2 cursor-pointer"
+      >
+        <div className={`capitalize ${category && "text-sky-400"}`}>
+          {category || "Select Category"}
         </div>
+        <IoIosArrowDown
+          className={`transition-transform ${
+            showDropDown ? "rotate-180" : "rotate-0"
+          }`}
+        />
       </div>
-      <div className={`border border-gray-300 rounded-lg w-full z-20  absolute left-0 top-10  flex-col justify-center items-start bg-white text-base gap-y-1 ${showDropDown ? "flex":"hidden"}`}>
-        {cat.map((v,i)=>(
-          <span key={i} onClick={()=>{setShowDropDown(false);setCateGory(v)}} className='hover:text-sky-400 hover:bg-gray-100 w-full px-2  py-1 capitalize text-nowrap first:rounded-t-lg last:rounded-b-lg'>{v}</span>
-        ))}
-      </div>
-      <div onClick={()=>setShowDropDown(false)} className={`absolute ${showDropDown ? "block":"hidden"} -top-40 -right-10 w-screen h-screen z-10`}>
-      </div>
-    </div>
-  )
-}
 
-export default DropDownMenu
+      {showDropDown && (
+        <div className="border border-gray-300 rounded-lg w-full z-20 absolute left-0 top-10 flex flex-col justify-center items-start bg-white text-base gap-y-1 shadow-md">
+          {categories.map((v, i) => (
+            <span
+              key={i}
+              onClick={() => handleSelect(v)}
+              className="hover:text-sky-400 hover:bg-gray-100 w-full px-2 py-1 capitalize text-nowrap first:rounded-t-lg last:rounded-b-lg cursor-pointer"
+            >
+              {v}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {showDropDown && (
+        <div
+          onClick={() => setShowDropDown(false)}
+          className="fixed inset-0 z-10"
+        />
+      )}
+    </div>
+  );
+};
+
+export default DropDownMenu;

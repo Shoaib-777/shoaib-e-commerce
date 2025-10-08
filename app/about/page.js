@@ -1,5 +1,10 @@
 import React from 'react'
 
+export const metadata = {
+  title: "About Us | FlashCart",
+  description: "Welcome to the FlashCart About Us Page",
+};
+
 const About = () => {
   return (
     <div className=''>

@@ -1,13 +1,13 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const orderSchema = new mongoose.Schema(
+const orderSchema = new Schema(
     {
+        user: { type: Schema.Types.ObjectId, ref: "User", required: true },
         orderId:{type:String,required:true},
         orderedAt:{type:String,require:true},
         expectedDelivery:{type:String},
         cancelledAt:{type:String,default:null},
         cancelled:{type:Boolean,default:false},
-        user: { type: Schema.Types.ObjectId, ref: "User", required: true },
         items: [
             {
                 product: { type: Schema.Types.ObjectId, ref: "Product", required: true },

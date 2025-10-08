@@ -1,5 +1,7 @@
 "use client";
-import React, { useState } from 'react';
+import { useAddressStore } from '@/store/useAddressStore';
+import { getUserIDCSR } from '@/utils/GetCSrUserId';
+import React, { useEffect, useState } from 'react';
 import {
   FaUser,        // User
   FaMapMarkerAlt,// MapPin
@@ -15,14 +17,14 @@ import { FaPhone } from "react-icons/fa6";
 import { IoClose } from 'react-icons/io5';
 
 
-export default function NewAddressCard({onSave,onToggle}) {
+export default function NewAddressCard({ onToggle }) {
   const [formData, setFormData] = useState({
     fullName: '',
-    mobileNumber: '',
-    alternatePhone: '',
+    phone: '',
+    alt_phone: '',
     email: '',
-    addressLine1: '',
-    addressLine2: '',
+    address1: '',
+    address2: '',
     landmark: '',
     city: '',
     state: '',
@@ -33,6 +35,9 @@ export default function NewAddressCard({onSave,onToggle}) {
   });
 
   const [errors, setErrors] = useState({});
+
+  const { addNewAddress } = useAddressStore()
+  const userId = getUserIDCSR()
 
   const countries = ['India', 'United States', 'United Kingdom', 'Canada', 'Australia'];
   const addressTypes = ['Home', 'Office', 'Other'];
@@ -53,15 +58,15 @@ export default function NewAddressCard({onSave,onToggle}) {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.fullName.trim()) newErrors.fullName = 'Full name is required';
-    if (!formData.mobileNumber.trim()) newErrors.mobile = 'Mobile number is required';
-    else if (!/^\d{10}$/.test(formData.mobileNumber.replace(/\D/g, ''))) {
+    if (!formData.fullName?.trim()) newErrors.fullName = 'Full name is required';
+    if (!formData.phone?.trim()) newErrors.mobile = 'Mobile number is required';
+    else if (!/^\d{10}$/.test(formData.phone.replace(/\D/g, ''))) {
       newErrors.mobile = 'Please enter a valid 10-digit mobile number';
     }
-    if (!formData.addressLine1.trim()) newErrors.addressLine1 = 'Address is required';
-    if (!formData.city.trim()) newErrors.city = 'City is required';
-    if (!formData.state.trim()) newErrors.state = 'State is required';
-    if (!formData.pincode.trim()) newErrors.pincode = 'Pincode is required';
+    if (!formData.address1?.trim()) newErrors.address1 = 'Address is required';
+    if (!formData.city?.trim()) newErrors.city = 'City is required';
+    if (!formData.state?.trim()) newErrors.state = 'State is required';
+    if (!formData.pincode?.trim()) newErrors.pincode = 'Pincode is required';
     else if (!/^\d{6}$/.test(formData.pincode)) {
       newErrors.pincode = 'Please enter a valid 6-digit pincode';
     }
@@ -73,11 +78,10 @@ export default function NewAddressCard({onSave,onToggle}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("sucess bro")
-      onSave(formData)
-      onToggle()
-      console.log('Form submitted:', formData);
-      alert('Address saved successfully!');
+      const payload = { ...formData, user:userId };
+      addNewAddress(payload);
+      onToggle();
+      console.log('Form submitted:', payload);
     }
   };
 
@@ -119,8 +123,8 @@ export default function NewAddressCard({onSave,onToggle}) {
             </label>
             <input
               type="tel"
-              name="mobileNumber"
-              value={formData.mobileNumber}
+              name="phone"
+              value={formData.phone}
               onChange={handleInputChange}
               className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.mobile ? 'border-red-500' : 'border-gray-300'
                 }`}
@@ -136,8 +140,8 @@ export default function NewAddressCard({onSave,onToggle}) {
             </label>
             <input
               type="tel"
-              name="alternatePhone"
-              value={formData.alternatePhone}
+              name="alt_phone"
+              value={formData.alt_phone}
               onChange={handleInputChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Alternate number"
@@ -169,14 +173,14 @@ export default function NewAddressCard({onSave,onToggle}) {
           </label>
           <input
             type="text"
-            name="addressLine1"
-            value={formData.addressLine1}
+            name="address1"
+            value={formData.address1}
             onChange={handleInputChange}
-            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.addressLine1 ? 'border-red-500' : 'border-gray-300'
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.address1 ? 'border-red-500' : 'border-gray-300'
               }`}
             placeholder="House/Flat/Block No., Building Name"
           />
-          {errors.addressLine1 && <p className="text-red-500 text-xs mt-1">{errors.addressLine1}</p>}
+          {errors.address1 && <p className="text-red-500 text-xs mt-1">{errors.address1}</p>}
         </div>
 
         {/* Address Line 2 */}
@@ -186,8 +190,8 @@ export default function NewAddressCard({onSave,onToggle}) {
           </label>
           <input
             type="text"
-            name="addressLine2"
-            value={formData.addressLine2}
+            name="address2"
+            value={formData.address2}
             onChange={handleInputChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Street Name, Area"
@@ -326,7 +330,7 @@ export default function NewAddressCard({onSave,onToggle}) {
             className="w-full md:w-[30%] bg-gray-300 hover:bg-gray-400 text-white font-medium py-3 px-4 rounded-md transition duration-200 flex items-center justify-center gap-2"
             onClick={onToggle}
           >
-            <IoClose  className="w-4 h-4" />
+            <IoClose className="w-4 h-4" />
             Cancel
           </button>
           <button

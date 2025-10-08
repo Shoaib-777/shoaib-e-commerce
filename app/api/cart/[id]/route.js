@@ -16,7 +16,7 @@ export const GET = async (req, { params }) => {
             return NextResponse.json({ data: [] }, { status: 200 });
         }
 
-        return NextResponse.json(cart, { status: 200 });
+        return NextResponse.json({ data: cart }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ message: "Internal server error", error: error.message }, { status: 500 });
     }

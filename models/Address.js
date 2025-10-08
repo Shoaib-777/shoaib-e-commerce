@@ -1,20 +1,20 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const addressSchema = new mongoose.Schema(
-{
+const addressSchema = new Schema(
+  {
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     fullName: { type: String, required: true },
     phone: { type: String, required: true },
-    alt_phone:{type:String},
-    email:{type:String},
+    alt_phone: { type: String },
+    email: { type: String },
     address1: { type: String, required: true },
-    address2: { type: String},
+    address2: { type: String },
     city: { type: String, required: true },
     state: { type: String, required: true },
-    landmark: { type: String,default:"" },
+    landmark: { type: String, default: "" },
     pincode: { type: Number, required: true },
     country: { type: String, required: true },
-    addressType:{type:String,required:true}
+    addressType: { type: String, required: true }
   },
   { timestamps: true }
 

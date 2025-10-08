@@ -7,8 +7,9 @@ const userSchema = new mongoose.Schema(
     phone: { type: String, required: true, unique: true },
     password: { type: String, required: true, minlength: 6 },
     profile: { type: String, default: "" },
-    cart: { type: Schema.Types.ObjectId, ref: "Cart" },
+    cart: { type: mongoose.Schema.Types.ObjectId, ref: "Cart" },
     wishlist: { type: Schema.Types.ObjectId, ref: "Wishlist" },
+    profilePublicId:{type:String} //todo change before deployment to required true
   },
   { timestamps: true }
 );

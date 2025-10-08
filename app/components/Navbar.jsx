@@ -6,12 +6,15 @@ import { BiUser } from "react-icons/bi";
 import { BsCart } from "react-icons/bs";
 import { FaRegHeart, FaSearch } from "react-icons/fa";
 import { IoMenu, IoCloseSharp } from "react-icons/io5";
+import { useSession, signOut } from "next-auth/react";
 
 
 const Navbar = () => {
+    
     const pathName = usePathname()
     const [menu, setMenu] = useState(false)
-    const authUser = false
+    const { data: session, status } = useSession();
+    const authUser = !!session
 
     return (
         <>
@@ -53,7 +56,7 @@ const Navbar = () => {
                         <div>
                             {authUser ? (
                                 <button
-                                    // onClick={onLogout}
+                                    onClick={() => signOut()}
                                     className="px-4 py-2 bg-red-500 text-white font-medium rounded-xl shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-1 transition"
                                 >
                                     Logout
@@ -88,7 +91,7 @@ const Navbar = () => {
                         {authUser ? (
                             <li>
                                 <button
-                                    // onClick={onLogout}
+                                    onClick={() => signOut()}
                                     className="px-4 py-2 bg-red-500 text-white font-medium rounded-xl shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-1 transition"
                                 >
                                     Logout
