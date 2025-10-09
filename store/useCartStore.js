@@ -19,7 +19,7 @@ export const useCartStore = create((set, get) => ({
             set({ isLoading: true })
             const res = await axiosInstance.get(`/cart/${id}`)
             set({ cartData: res.data.data.items })
-            console.log(res.data.data)
+            // console.log(res.data.data)
         } catch (error) {
             console.log("error fetching user cart data", error)
         } finally {
@@ -38,6 +38,7 @@ export const useCartStore = create((set, get) => ({
 
             const { data } = await axiosInstance.post("/cart", payload);
             if (data.message) console.log(data.message);
+            get().getCartData(userId);
             return data.message;
 
         } catch (error) {
@@ -49,7 +50,6 @@ export const useCartStore = create((set, get) => ({
 
 
     updateQuantity: async (userId, itemId, action) => {
-        console.log("iam payload", userId, itemId, action)
         try {
             const currentCart = get().cartData;
             const item = currentCart.find((i) => i._id === itemId);
@@ -66,7 +66,7 @@ export const useCartStore = create((set, get) => ({
                         i._id === itemId ? { ...i, quantity: newQuantity } : i
                     ),
                 });
-            }
+            }get().getCartData(userId);
         } catch (error) {
             console.error("Update cart error:", error);
         }
@@ -84,7 +84,7 @@ export const useCartStore = create((set, get) => ({
                     set({ cartData: currentCart.filter((item) => item._id !== itemId) });
                 } else if (action === "clearcart") {
                     set({ cartData: [] });
-                }
+                }get().getCartData(userId);
             } else {
                 alert("Something went wrong updating the cart");
             }

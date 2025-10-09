@@ -11,7 +11,6 @@ export const useWishlistStore = create((set, get) => ({
         try {
             set({ isLoading: true })
             const { data } = await axiosInstance.get(`/wishlist/${id}`)
-            console.log("iam wishlist data", data.data[0].products)
             set({ wishlistData: data.data[0].products })
         } catch (error) {
             console.log("error fetching user wishlist", error)
@@ -25,7 +24,7 @@ export const useWishlistStore = create((set, get) => ({
         }
         try {
             const { data } = await axiosInstance.post("/wishlist", { userId, productId })
-            console.log("add to wishlist", data)
+            get().getWishList(userId)
         } catch (error) {
             console.log("error add to wishlist ", error)
         }
@@ -41,6 +40,7 @@ export const useWishlistStore = create((set, get) => ({
             })
             if(data.status === "ok"){
                 set({wishlistData: currentWishlist.filter((item)=>item._id !== productId)})
+                get().getWishList(userId)
             }
         } catch (error) {
             console.log("error removing from wishlist ", error)

@@ -20,14 +20,6 @@ const Signup = () => {
         setProfilePublicId(result.info.public_id);
     };
 
-    const signUp = async (data) => {
-        try {
-
-        } catch (error) {
-            toast.error("Something Went Wrong");
-        }
-    }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = {
@@ -38,7 +30,6 @@ const Signup = () => {
             profileImage: imageUrl,
             profilePublicId: profilePublicId,
         };
-        console.log('Signup Data:', data);
         const loadingToast = toast.loading("Loading Please Wait...");
         const res = await UserSignUp(data);
         toast.dismiss(loadingToast);
@@ -54,7 +45,7 @@ const Signup = () => {
 
     return (
         <>
-            <ToastContainer theme='dark' autoClose={2000} />
+            <ToastContainer theme='dark' autoClose={2000} closeOnClick={true}/>
             <div className="background w-full min-h-screen py-3">
                 <div className="container mx-auto h-full flex justify-center items-center px-2 sm:px-0">
                     <div className="border border-gray-200 bg-transparent rounded-lg px-4 py-6 w-full max-w-md">

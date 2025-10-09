@@ -2,14 +2,15 @@
 import { useCartStore } from '@/store/useCartStore'
 import { useWishlistStore } from '@/store/useWishlistStore'
 import { getUserIDCSR } from '@/utils/GetCSrUserId'
-import React, { useEffect, useState } from 'react'
+import { redirectFromSSR } from '@/utils/ServerActions'
+import React from 'react'
 import { BsCart3 } from 'react-icons/bs'
 import { IoHeartCircleOutline } from 'react-icons/io5'
 
-const AddToCartBtn = ({ productId, session }) => {
+const AddToCartBtn = ({ productId }) => {
     const userId = getUserIDCSR()
-    const { addToCart, getCartData, cartData, setShowCartTrue } = useCartStore()
-    const { addToWishList, removeFromWishlist, getWishList, wishlistData } = useWishlistStore()
+    const { addToCart, cartData, setShowCartTrue } = useCartStore()
+    const { addToWishList, removeFromWishlist, wishlistData } = useWishlistStore()
     let see = cartData?.map((item) => item.product._id.toString())
     let see2 = wishlistData?.map((item) => item._id.toString())
     const isInCart = see.includes(productId)
@@ -18,23 +19,28 @@ const AddToCartBtn = ({ productId, session }) => {
 
     const handleAddToCart = async (productId) => {
         if (!userId) {
-            //toast
+           alert("Please Login Before Add To Cart!")
+            setTimeout(() => {
+                redirectFromSSR("/login")
+            }, 3000)
             return;
         }
 
         try {
             await addToCart(userId, "single_add", productId);
-            setTimeout(() => getCartData(userId), 500);
         } catch (err) {
-            //error toast
+            alert("Something Went Wrong")
         }
     };
 
     const handleAddToWishlist = async (productId) => {
         if (!userId) {
-            //toast
+            alert("Please Login Before Add To Cart!")
+            setTimeout(() => {
+                redirectFromSSR("/login")
+            }, 3000)
+            return;
         }
-
         try {
 
             if (isInWishList) {
@@ -44,7 +50,7 @@ const AddToCartBtn = ({ productId, session }) => {
             }
 
         } catch (err) {
-            //toast err
+            alert("Something Went Wrong")
         }
     };
 

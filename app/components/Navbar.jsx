@@ -18,7 +18,7 @@ const Navbar = () => {
 
     return (
         <>
-            <div className="border border-gray-200 w-full h-[60px] px-4 py-2 mb-3 relative ">
+            <div className="border border-gray-200 w-full h-[60px] px-4 py-2 mb-3 relative  ">
                 <nav className="flex justify-between">
                     <div className="flex px-4">
                         <Link href={'/'}><svg width="180" height="40" viewBox="-18 1 155 20" stroke='1' xmlns="http://www.w3.org/2000/svg" className='border border-gray-300 rounded-lg shadow-sm' >
@@ -79,7 +79,7 @@ const Navbar = () => {
                     </div>
                 </nav >
             </div >
-            <div className={`${menu ? 'block' : 'hidden'}  w-full h-[100%] bg-slate-50 absolute z-10 px-4 pt-[6rem]`}>
+            <div className={`${menu ? 'block' : 'hidden'}  w-full h-screen bg-slate-50  z-10 px-4 pt-[6rem]`}>
                 <div className='px-4 py-2 '>
                     <ul className='flex flex-col justify-center items-center gap-6 font-semibold'>
                         <Link href={'/'}><li

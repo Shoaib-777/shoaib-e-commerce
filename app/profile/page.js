@@ -5,7 +5,6 @@ import EditProfileBtn from '../components/EditProfileBtn';
 import ClientEditProfile from '../components/ClientEditProfile';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]/route';
-import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
 

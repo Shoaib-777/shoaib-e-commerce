@@ -12,7 +12,6 @@ export const useAddressStore = create((set, get) => ({
     try {
       set({ isLoading: true });
       const { data } = await axiosInstance.get(`/address/${userId}`);
-      console.log(data.data)
       set({ SavedAddresses: data.data.addresses || [] });
     } catch (error) {
       console.error("Error fetching user addresses:", error);

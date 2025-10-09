@@ -7,7 +7,7 @@ export const useProductStore = create((set,get)=>({
     getAllProductData:async()=>{
         try {
             const {data}  = await axiosInstance.get("/products")
-            console.log(data.data)
+            // console.log(data.data)
             set({ProductsData:data.data})
         } catch (error) {
             console.log("error fetching products data",error)

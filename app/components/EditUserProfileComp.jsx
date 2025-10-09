@@ -115,7 +115,7 @@ const EditUserProfileComp = ({userId}) => {
 
     return (
         <>
-        <ToastContainer theme="dark" autoClose={3000}/>
+        <ToastContainer theme="dark" autoClose={3000} closeOnClick={true}/>
         <div
             onClick={toggleEditFalse}
             className={`${showEdit ? "flex" : "hidden"} fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50`}

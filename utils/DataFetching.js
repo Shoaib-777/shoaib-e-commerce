@@ -26,7 +26,7 @@ export const getUserWishList = async (id) => {
     try {
         const res = await axiosInstance.get(`/wishlist/${id}`);
         const all = res.data.data[0].products || [];
-        console.log("iam at server get user wishlist",all)
+        // console.log("iam at server get user wishlist",all)
         return all;
     } catch (error) {
         console.log("error fetching user wishlist", error);
@@ -55,7 +55,6 @@ export const getSingleUser = async (id) => {
 export const getUserOrders = async (id) => {
     try {
         const res = await axiosInstance.get(`/order/${id}`)
-        console.log(res.data.data)
         return res.data.data
 
     } catch (error) {

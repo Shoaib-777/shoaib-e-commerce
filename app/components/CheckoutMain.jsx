@@ -9,6 +9,7 @@ import { useCartStore } from "@/store/useCartStore";
 import { useOrderStore } from "@/store/useOrderStore";
 import { getUserIDCSR } from "@/utils/GetCSrUserId";
 import NewAddressCard from "./NewAddressCard";
+import Link from "next/link";
 
 
 //address card component
@@ -29,7 +30,11 @@ const AddressCard = ({ selectedAddress, setSelectedAddress, showNewAddress, setS
       </div>
 
       {isLoading ? (
-        <div>Loading...</div>
+        <div className="flex flex-col items-center justify-center h-[400px] space-y-4">
+          <div className="loading loading-spinner loading-lg text-primary"></div>
+          <p className="text-lg font-medium text-gray-700">Loading, please wait...</p>
+        </div>
+
       ) : (
         <div className="space-y-4">
           {SavedAddresses.map((address) => (
@@ -250,7 +255,6 @@ const OrderConfirmation = ({ onConfirm, handleFinalOrder, progressStage, setProg
       totalAmount,
     };
 
-    console.log("✅ Final Order Data:", data);
     placeOrder(data); // send data to backend
     setShowAlert(false);
     onConfirm();
@@ -411,7 +415,7 @@ const ProgressBar = ({ progressStage }) => {
 const CheckoutMain = () => {
   const router = useRouter()
   const userId = getUserIDCSR()
-  const {getCartData}= useCartStore()
+  const { getCartData } = useCartStore()
   const { isLoading, getUserAddress } = useAddressStore()
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [selectedPayment, setSelectedPayment] = useState('');
@@ -460,8 +464,29 @@ const CheckoutMain = () => {
 
   useEffect(() => {
     getUserAddress(userId)
-  }, [])
+  }, [userId])
 
+
+  if (!userId) {
+    return (
+      <div className="flex items-center justify-center h-[calc(100vh-120px)] bg-gray-50 px-4">
+        <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-8 text-center border border-gray-300">
+          <FaLock className="mx-auto h-12 w-12 text-red-500" />
+          <h2 className="mt-6 text-2xl font-semibold text-gray-800">
+            Please login before checkout
+          </h2>
+          <p className="mt-2 text-gray-600">
+            You need to login to access the checkout and complete your order.
+          </p>
+          <Link href="/login">
+            <span className="mt-6 inline-block w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-300">
+              Go to Login
+            </span>
+          </Link>
+        </div>
+      </div>
+    )
+  }
 
   if (showOrderConfirm) {
     return (

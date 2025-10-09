@@ -81,7 +81,6 @@ export default function NewAddressCard({ onToggle }) {
       const payload = { ...formData, user:userId };
       addNewAddress(payload);
       onToggle();
-      console.log('Form submitted:', payload);
     }
   };
 

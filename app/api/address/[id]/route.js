@@ -15,7 +15,6 @@ export const GET = async (req, { params }) => {
         }
         const res_data = { user: id, addresses: data.map(addr => ({ _id: addr._id, fullName: addr.fullName, phone: addr.phone, alt_phone: addr.alt_phone, email: addr.email, address1: addr.address1, address2: addr.address2, city: addr.city, state: addr.state, landmark: addr.landmark, pincode: addr.pincode, country: addr.country, addressType: addr.addressType, createdAt: addr.createdAt, updatedAt: addr.updatedAt })) }
 
-        console.log(data)
         return NextResponse.json({ data: res_data, message: "ok" }, { status: 200 })
     } catch (error) {
         console.log("error get request of address at server", error)

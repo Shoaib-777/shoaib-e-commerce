@@ -12,7 +12,6 @@ const Cart = () => {
   const { cartData, updateQuantity, removeFromCart ,setShowCartFalse } = useCartStore();
 
   const handleUpdateQuantity = (itemId, action) => {
-    console.log("iam product id", itemId)
     updateQuantity(userId, itemId, action)
   };
 

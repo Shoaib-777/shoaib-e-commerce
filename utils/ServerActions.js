@@ -156,7 +156,6 @@ export const sendQuery = async (formData) => {
 }
 
 export const UserSignUp = async (formData) => {
-  console.log(formData)
   const { name, email, phone, password, profile, profilePublicId } = formData
   try {
     await ConnectDB()
@@ -197,8 +196,6 @@ export async function findUserByEmail(email) {
 }
 
 export async function verifyPassword(userPassword, originalPassword) {
-  console.log("iam orginal passwrod user enter", userPassword)
-  console.log("iam saved db password", originalPassword)
   try {
     const isValid = await bcrypt.compare(userPassword, originalPassword);
     return isValid;
