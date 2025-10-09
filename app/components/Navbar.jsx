@@ -1,7 +1,7 @@
 "use client";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BiUser } from "react-icons/bi";
 import { BsCart } from "react-icons/bs";
 import { FaRegHeart, FaSearch } from "react-icons/fa";
@@ -10,11 +10,19 @@ import { useSession, signOut } from "next-auth/react";
 
 
 const Navbar = () => {
-    
+
     const pathName = usePathname()
     const [menu, setMenu] = useState(false)
     const { data: session, status } = useSession();
-    const authUser = !!session
+    const [authUser, setAuthUser] = useState(false)
+
+    useEffect(() => {
+        if (status === "authenticated") {
+            setAuthUser(true);
+        } else {
+            setAuthUser(false);
+        }
+    }, [status]);
 
     return (
         <>

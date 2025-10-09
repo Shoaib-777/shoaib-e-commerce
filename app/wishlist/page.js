@@ -1,13 +1,14 @@
-"use client"
-import { SessionProvider } from 'next-auth/react'
-import React from 'react'
-import WishlistComp from '../components/WishlistComp'
 import Link from 'next/link'
 import { FaHeart } from 'react-icons/fa'
 
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import WishlistComp from "../components/WishlistComp";
 
-const Wishlist = ({ session }) => {
-  if(!session){
+export default async function Wishlist() {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
     return (
       <div className="flex items-center justify-center h-[calc(100vh-120px)] bg-gray-50 px-4">
       <div className="max-w-md w-full bg-white shadow-xl rounded-xl p-8 text-center border border-gray-300">
@@ -26,12 +27,7 @@ const Wishlist = ({ session }) => {
       </div>
     </div>
     )
-  }
-  return (
-    <SessionProvider session={session}>
-      <WishlistComp session={session} />
-    </SessionProvider>
-  )
 }
 
-export default Wishlist
+  return <WishlistComp session={session} />;
+}
