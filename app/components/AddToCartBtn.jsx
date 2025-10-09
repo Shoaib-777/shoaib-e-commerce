@@ -3,12 +3,12 @@ import { useCartStore } from '@/store/useCartStore'
 import { useWishlistStore } from '@/store/useWishlistStore'
 import { redirectFromSSR } from '@/utils/ServerActions'
 import { useSession } from 'next-auth/react'
-import React from 'react'
+import React, { useId } from 'react'
 import { BsCart3 } from 'react-icons/bs'
 import { IoHeartCircleOutline } from 'react-icons/io5'
 
 const AddToCartBtn = ({ productId }) => {
-    const {data:session} = useSession()
+    const { data: session } = useSession()
     const userId = session?.user?.id
     const { addToCart, cartData, setShowCartTrue } = useCartStore()
     const { addToWishList, removeFromWishlist, wishlistData } = useWishlistStore()
@@ -20,7 +20,7 @@ const AddToCartBtn = ({ productId }) => {
 
     const handleAddToCart = async (productId) => {
         if (!userId) {
-           alert("Please Login Before Add To Cart!")
+            alert("Please Login Before Add To Cart!")
             setTimeout(() => {
                 redirectFromSSR("/login")
             }, 3000)
@@ -28,6 +28,7 @@ const AddToCartBtn = ({ productId }) => {
         }
 
         try {
+            console.log("iam userid", useId)
             await addToCart(userId, "single_add", productId);
         } catch (err) {
             alert("Something Went Wrong")
@@ -45,8 +46,12 @@ const AddToCartBtn = ({ productId }) => {
         try {
 
             if (isInWishList) {
+                console.log("iam userid", useId)
+
                 await removeFromWishlist(userId, productId);
             } else {
+                console.log("iam userid", useId)
+
                 await addToWishList(userId, productId);
             }
 

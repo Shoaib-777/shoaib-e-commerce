@@ -9,7 +9,8 @@ import { getUserIDCSR } from '@/utils/GetCSrUserId';
 import AddToCartWrapper from './AddToCartWrapper';
 import { FaHeart } from 'react-icons/fa';
 
-const WishlistComp = () => {
+const WishlistComp = ({session}) => {
+    console.log("iam session",session)
     const userId = getUserIDCSR()
     const { addToCart, getCartData } = useCartStore()
     const { isLoading, getWishList, wishlistData } = useWishlistStore()
@@ -122,7 +123,7 @@ const WishlistComp = () => {
 
                                     {/* Action Buttons */}
                                     <AddToCartWrapper
-                                        productId={item._id.toString()} 
+                                        productId={item._id.toString()} session={session}
                                     />
                                 </div>
 

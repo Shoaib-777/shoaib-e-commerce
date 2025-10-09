@@ -1,9 +1,6 @@
-"use client";
-
-
-import { SessionProvider } from 'next-auth/react';
-import React from 'react'
+"use client"
 import WishlistComp from '../components/WishlistComp';
+import { SessionProvider } from 'next-auth/react';
 
 
 const Wishilst = ({session}) => {

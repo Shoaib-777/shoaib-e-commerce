@@ -7,10 +7,10 @@ import dynamic from "next/dynamic";
 
 const AddToCartBtn = dynamic(() => import("./AddToCartBtn"), { ssr: false });
 
-export default function AddToCartWrapper({ productId, session }) {
+export default function AddToCartWrapper({ productId,session }) {
   return (
     <SessionProvider session={session}>
-      <AddToCartBtn productId={productId} />
+      <AddToCartBtn productId={productId}  />
     </SessionProvider>
   );
 }

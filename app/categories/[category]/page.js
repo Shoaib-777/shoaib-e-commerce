@@ -15,7 +15,7 @@ export async function generateMetadata({ params }) {
   };
 }
 
-const CategoriesPage = async ({ params }) => {
+const CategoriesPage = async ({ params,session }) => {
   const { category } = await params;
   const urlDecode = decodeURIComponent(category)
 
@@ -37,7 +37,7 @@ const CategoriesPage = async ({ params }) => {
       </div>
 
       {/* ✅ Map the fetched products */}
-      <CategoryProductsCard products={products} />
+      <CategoryProductsCard products={products} session={session} />
     </div>
   );
 };
