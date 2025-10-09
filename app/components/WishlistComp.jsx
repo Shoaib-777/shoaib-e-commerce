@@ -10,7 +10,6 @@ import AddToCartWrapper from './AddToCartWrapper';
 import { FaHeart } from 'react-icons/fa';
 
 const WishlistComp = ({session}) => {
-    console.log("iam session",session)
     const userId = getUserIDCSR()
     const { addToCart, getCartData } = useCartStore()
     const { isLoading, getWishList, wishlistData } = useWishlistStore()
