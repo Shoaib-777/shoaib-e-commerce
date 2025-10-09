@@ -207,4 +207,5 @@ export async function verifyPassword(userPassword, originalPassword) {
 
 export const redirectFromSSR = async (path) => {
   redirect(path)
+  revalidatePath(path)
 }

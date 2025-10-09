@@ -2,9 +2,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { BiUser } from "react-icons/bi";
-import { BsCart } from "react-icons/bs";
-import { FaRegHeart, FaSearch } from "react-icons/fa";
 import { IoMenu, IoCloseSharp } from "react-icons/io5";
 import { useSession, signOut } from "next-auth/react";
 
@@ -15,6 +12,10 @@ const Navbar = () => {
     const [menu, setMenu] = useState(false)
     const { data: session, status } = useSession();
     const [authUser, setAuthUser] = useState(false)
+
+    const handleLogout = async () => {
+        await signOut({ redirect: true,callbackUrl:"/login"});
+    };
 
     useEffect(() => {
         if (status === "authenticated") {
@@ -64,7 +65,7 @@ const Navbar = () => {
                         <div>
                             {authUser ? (
                                 <button
-                                    onClick={() => signOut()}
+                                    onClick={handleLogout}
                                     className="px-4 py-2 bg-red-500 text-white font-medium rounded-xl shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-1 transition"
                                 >
                                     Logout
@@ -99,7 +100,7 @@ const Navbar = () => {
                         {authUser ? (
                             <li>
                                 <button
-                                    onClick={() => signOut()}
+                                    onClick={handleLogout}
                                     className="px-4 py-2 bg-red-500 text-white font-medium rounded-xl shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-1 transition"
                                 >
                                     Logout
