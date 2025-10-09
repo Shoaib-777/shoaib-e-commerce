@@ -1,14 +1,15 @@
 "use client"
 import { useCartStore } from '@/store/useCartStore'
 import { useWishlistStore } from '@/store/useWishlistStore'
-import { getUserIDCSR } from '@/utils/GetCSrUserId'
 import { redirectFromSSR } from '@/utils/ServerActions'
+import { useSession } from 'next-auth/react'
 import React from 'react'
 import { BsCart3 } from 'react-icons/bs'
 import { IoHeartCircleOutline } from 'react-icons/io5'
 
 const AddToCartBtn = ({ productId }) => {
-    const userId = getUserIDCSR()
+    const {data:session} = useSession()
+    const userId = session?.user?.id
     const { addToCart, cartData, setShowCartTrue } = useCartStore()
     const { addToWishList, removeFromWishlist, wishlistData } = useWishlistStore()
     let see = cartData?.map((item) => item.product._id.toString())
