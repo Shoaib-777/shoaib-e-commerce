@@ -4,32 +4,46 @@ import { LuEye, LuEyeOff } from "react-icons/lu";
 import { FcGoogle } from "react-icons/fc";
 import Link from 'next/link';
 import { signIn } from "next-auth/react";
-import { redirectFromSSR } from '@/utils/ServerActions';
 import { toast, ToastContainer } from 'react-toastify';
-// import { getUserIDCSR } from '@/utils/GetCSrUserId';
 
 const LoginWrapper = () => {
     const handleLoginWithGoogle = () => alert("sorry this function is currently un-available")
     const [showPassword, setShowPassword] = useState(false)
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const loadingToast = toast.loading("Loading Please Wait...");
         const email = e.target.email.value;
         const password = e.target.password.value;
 
-        const res = await signIn("credentials", { redirect: false, email, password });
-        toast.dismiss(loadingToast);
+        const loadingToast = toast.loading("Loading Please Wait...");
 
-        if (res.error) {
-            toast.error("Incorrect Email Or Password")
-        } else {
-            toast.success("Login Success, Please Wait Redirecting...")
-            setTimeout(() => {
-                redirectFromSSR("/profile")
-            }, 3000);
+        try {
+            const result = await signIn("credentials", {
+                redirect: false,
+                email,
+                password,
+            });
+
+            toast.dismiss(loadingToast);
+
+            if (result?.error) {
+                toast.error("Incorrect Email or Password");
+            } else {
+                toast.success("Login Success! Redirecting...");
+
+                // Now actually call signIn again with redirect:true to let NextAuth handle redirect
+                await new Promise((res) => setTimeout(res, 1200)); // small delay to let toast show
+                await signIn("credentials", {
+                    redirect: true,
+                    email,
+                    password,
+                    callbackUrl: "/profile",
+                });
+            }
+        } catch (err) {
+            toast.dismiss(loadingToast);
+            toast.error("Something went wrong!");
         }
-
-    }
+    };
     return (
         <>
             <ToastContainer theme='dark' autoClose={2000} closeOnClick={true} />
