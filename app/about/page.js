@@ -41,18 +41,18 @@ const About = () => {
       <div className='bg-[#dcedfc] py-4 md:pb-[4rem]'>
         <h1 className='text-center text-xl md:text-2xl font-bold text-[mehroon] mb-4 '>Hubspot By The Numbers</h1>
         <div className='flex flex-col md:flex-row mx-auto justify-center items-center gap-8'>
-          <div className='bg-white min-w-[200px] min-h-[210px] rounded-md border border-gray-200 shadow-lg px-2 md:px-6 '>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqIdL_lBgXixJYTsrsi7hYrIhrco_CcVgt05ZipMVQRHzb3avAjp3Pp_mgsP_XMpgS580&usqp=CAU" alt="no avatr" className='object-contain' />
+          <div className='bg-white w-[200px] h-[210px] rounded-md border border-gray-200 shadow-lg px-2 md:px-6 '>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqIdL_lBgXixJYTsrsi7hYrIhrco_CcVgt05ZipMVQRHzb3avAjp3Pp_mgsP_XMpgS580&usqp=CAU" alt="no avatr" className='object-contain size-[152px] mx-auto' />
             <h4 className='font-bold text-center '>12 Global Offices</h4>
             <span className='flex justify-center text-[#4089ab] font-bold underline decoration-2 decoration-indigo-900 cursor-pointer'>Learn More</span>
           </div>
           <div className='bg-white w-[200px] h-[210px] rounded-md border border-gray-200 shadow-lg px-2 md:px-6 '>
-            <img src="https://www.thirdwunder.com/wp-content/uploads/2023/11/2022_Design_Icon_ThreePortraits-1-TW-4_3-800x600.png" alt="no avatr" className='object-contain w-[152px] h-[152px] ' />
+            <img src="https://www.thirdwunder.com/wp-content/uploads/2023/11/2022_Design_Icon_ThreePortraits-1-TW-4_3-800x600.png" alt="no avatr" className='object-contain w-[152px] h-[152px] mx-auto ' />
             <h4 className='font-bold text-center '>7,600+ Employees</h4>
             <span className='flex justify-center text-[#4089ab] font-bold underline decoration-2 decoration-indigo-900 cursor-pointer'>Learn More</span>
           </div>
           <div className='bg-white w-[200px] h-[210px] rounded-md border border-gray-200 shadow-lg px-2 md:px-6 '>
-            <img src="https://cdn.dribbble.com/users/1129235/screenshots/3127245/2-gif.gif" alt="no avatr" className='object-contain w-[152px] h-[152px] ' />
+            <img src="https://cdn.dribbble.com/users/1129235/screenshots/3127245/2-gif.gif" alt="no avatr" className='object-contain w-[152px] h-[152px] mx-auto ' />
             <h4 className='font-bold text-center '>20500+ Customers</h4>
             <span className='flex justify-center text-[#4089ab] font-bold underline decoration-2 decoration-indigo-900 cursor-pointer'>Learn More</span>
           </div>
