@@ -61,4 +61,18 @@
   height: 100%;
   object-fit: contain;
 }
+@layer{
+@keyframes fillUp {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+.animate-fillUp {
+  animation: fillUp 1.2s ease-in-out forwards;
+}
+}
 }
