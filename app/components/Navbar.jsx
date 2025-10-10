@@ -27,9 +27,9 @@ const Navbar = () => {
 
     return (
         <>
-            <div className="border border-gray-200 w-full h-[60px] px-4 py-2 mb-3 relative  ">
-                <nav className="flex justify-between">
-                    <div className="flex px-4">
+            <div className="border border-gray-200 w-full h-[60px] px-2 py-2 mb-3 relative  ">
+                <nav className="flex justify-between ">
+                    <div className="flex">
                         <Link href={'/'}><svg width="180" height="40" viewBox="-18 1 155 20" stroke='1' xmlns="http://www.w3.org/2000/svg" className='border border-gray-300 rounded-lg shadow-sm' >
                             <defs>
                                 <linearGradient id="text-gradient" x1="0%" y1="0%" x2="100%" y2="0%">

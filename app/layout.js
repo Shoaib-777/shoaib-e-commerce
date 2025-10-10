@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "./components/Footer";
 import TogetherComp from "./components/TogetherComp";
+import NextTopLoader from "nextjs-toploader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,9 +23,21 @@ export const metadata = {
 export default function RootLayout({ children, session }) {
   return (
     <html lang="en">
+      {/* <!-- Google tag (gtag.js) --> */}
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-M2B04QY69R"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments)}
+        gtag('js', new Date());
+
+        gtag('config', 'G-M2B04QY69R');
+      </script>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+         <NextTopLoader
+          color="linear-gradient(to right, rgb(134, 239, 172), rgb(59, 130, 246), rgb(147, 51, 234))"
+        />
         <TogetherComp session={session} />
         {children}
         <Footer />
