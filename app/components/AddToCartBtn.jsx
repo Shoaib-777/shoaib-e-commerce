@@ -3,7 +3,7 @@ import { useCartStore } from '@/store/useCartStore'
 import { useWishlistStore } from '@/store/useWishlistStore'
 import { redirectFromSSR } from '@/utils/ServerActions'
 import { useSession } from 'next-auth/react'
-import React, { useId } from 'react'
+import React from 'react'
 import { BsCart3 } from 'react-icons/bs'
 import { IoHeartCircleOutline } from 'react-icons/io5'
 
@@ -28,7 +28,7 @@ const AddToCartBtn = ({ productId }) => {
         }
 
         try {
-            console.log("iam userid", useId)
+            // console.log("iam userid", userId)
             await addToCart(userId, "single_add", productId);
         } catch (err) {
             alert("Something Went Wrong")
@@ -46,11 +46,11 @@ const AddToCartBtn = ({ productId }) => {
         try {
 
             if (isInWishList) {
-                console.log("iam userid", useId)
+                // console.log("iam userid", userId)
 
                 await removeFromWishlist(userId, productId);
             } else {
-                console.log("iam userid", useId)
+                // console.log("iam userid", userId)
 
                 await addToWishList(userId, productId);
             }

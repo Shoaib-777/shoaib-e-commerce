@@ -1,50 +1,53 @@
 "use client";
-import React, { useEffect } from 'react'
+import React from 'react'
 import { AiOutlineHeart } from 'react-icons/ai'
 import { BsCart3 } from 'react-icons/bs'
 import { useWishlistStore } from '@/store/useWishlistStore';
 import { useCartStore } from '@/store/useCartStore';
 import Link from 'next/link';
-import { getUserIDCSR } from '@/utils/GetCSrUserId';
 import AddToCartWrapper from './AddToCartWrapper';
 import { FaHeart } from 'react-icons/fa';
+import { useSession } from 'next-auth/react';
 
-const WishlistComp = ({session}) => {
-    const userId = getUserIDCSR()
-    const { addToCart, getCartData } = useCartStore()
-    const { isLoading, getWishList, wishlistData } = useWishlistStore()
+const WishlistComp = () => {
+    const { data: session } = useSession()
+    const userId = session?.user?.id
+    const { addToCart } = useCartStore()
+    const { isLoading, wishlistData } = useWishlistStore()
 
     const moveAllToCart = () => {
         const productsId = wishlistData.map((item) => item._id)
         addToCart(userId, "multiple_add", null, productsId)
-        setTimeout(() => {
-            getCartData(userId)
-        }, 500);
     }
 
-    useEffect(() => {
-        getWishList(userId)
-    }, [userId])
-
-    if(!userId){
+    if (isLoading) {
         return (
-      <div className="flex items-center justify-center h-[calc(100vh-120px)] bg-gray-50 px-4">
-      <div className="max-w-md w-full bg-white shadow-xl rounded-xl p-8 text-center border border-gray-300">
-        <FaHeart className="mx-auto h-14 w-14 text-pink-500" />
-        <h2 className="mt-6 text-2xl font-semibold text-gray-800">
-          Your Wishlist is empty
-        </h2>
-        <p className="mt-2 text-gray-600">
-          You need to login to save your favorite products.
-        </p>
-        <Link href="/login">
-          <span className="mt-6 inline-block w-full bg-pink-500 hover:bg-pink-600 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300">
-            Go to Login
-          </span>
-        </Link>
-      </div>
-    </div>
-    )
+            <div className="flex flex-col items-center justify-center h-[400px] space-y-4">
+                <div className="loading loading-spinner loading-lg text-primary"></div>
+                <p className="text-lg font-medium text-gray-700">Loading, please wait...</p>
+            </div>
+        )
+    }
+
+    if (!userId) {
+        return (
+            <div className="flex items-center justify-center h-[calc(100vh-120px)] bg-gray-50 px-4">
+                <div className="max-w-md w-full bg-white shadow-xl rounded-xl p-8 text-center border border-gray-300">
+                    <FaHeart className="mx-auto h-14 w-14 text-pink-500" />
+                    <h2 className="mt-6 text-2xl font-semibold text-gray-800">
+                        Your Wishlist is empty
+                    </h2>
+                    <p className="mt-2 text-gray-600">
+                        You need to login to save your favorite products.
+                    </p>
+                    <Link href="/login">
+                        <span className="mt-6 inline-block w-full bg-pink-500 hover:bg-pink-600 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300">
+                            Go to Login
+                        </span>
+                    </Link>
+                </div>
+            </div>
+        )
     }
 
     return (
